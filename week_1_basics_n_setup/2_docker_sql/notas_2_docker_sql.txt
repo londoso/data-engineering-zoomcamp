@@ -1,0 +1,33 @@
+
+-- ejecutar el contenedor con postgress
+
+docker run -it \
+  -e POSTGRES_USER="root" \
+  -e POSTGRES_PASSWORD="root" \
+  -e POSTGRES_DB="ny_taxi" \
+  -v "$(pwd)/ny-taxi-volume:/var/lib/postgresql/data" \
+  -p 5432:5432 \
+  postgres:13
+
+-- probar conexión a postgress con la librería pgcli de python
+
+pip install pgcli
+
+pgcli -h localhost -p 5432 -u root -d ny_taxi
+
+-- nueva ubicación del backup con los datos de taxis
+
+https://github.com/DataTalksClub/nyc-tlc-data
+
+-- descargar dataset
+
+wget https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/yellow_tripdata_2021-01.csv.gz
+
+-- Docker compose
+
+docker-compose up
+
+-- ingreso a pgadmin
+usuario: admin@admin.com
+clave: root
+
